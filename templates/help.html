@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ideaBoat</title>
+</head>
+<body>
+    <h2>my google login project</h2>
+    {% if user.is_authenticated %}
+    <p> Abhinandan, {{user.first_name}} ! </p>
+ <h2>List of Available Apis</h2>
+ <h3> go to api root: <a href="http://127.0.0.1:8000/api/">api root</a></h3> 
+
+<br>
+
+
+
+
+    {% else %}
+    <h2> please log in </h2>
+    <a href="http://127.0.0.1:8000/accounts/login/">Login</a>
+    
+    {% endif %}
+    
+</body>
+</html>
