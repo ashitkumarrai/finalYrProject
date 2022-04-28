@@ -5,6 +5,7 @@ from django.views.generic import TemplateView
 from ideaBoatApp1 import views
 
 
+
 urlpatterns = [
     path('api/users/', views.UserList.as_view()),
     path('api/users/<int:pk>/', views.UserDetail.as_view()),
@@ -24,6 +25,7 @@ urlpatterns = [
 
 
 
+
     path('api/likes/<int:pk>/', views.LikeDetail.as_view()),
     path('api/likes/', views.LikeList.as_view()),
 
@@ -31,8 +33,12 @@ urlpatterns = [
 
 
     
-    path('api/auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('api/', include('djoser.urls.authtoken')),
+    
+     
     path('accounts/',include('allauth.urls')),
+    path('api/login/', views.LoginView.as_view()),
+     path('api/register/', views.RegisterAPI.as_view(), name='auth_register'),
 
 
     

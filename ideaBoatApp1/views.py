@@ -1,4 +1,6 @@
+from django.http import HttpResponse
 from rest_framework import permissions
+from rest_framework.response import Response
 from django.contrib.auth.models import User
 from rest_framework import  serializers,generics
 from ideaBoatApp1 import serializers
@@ -6,6 +8,8 @@ from ideaBoatApp1.permissions import IsOwnerOrReadOnly
 from django.contrib.auth.models import User
 from .models import Post,Comment,PostLikes,Post_Category
 from rest_framework.permissions import IsAdminUser
+from rest_framework import views
+
 
 
 
@@ -17,6 +21,23 @@ class UserList(generics.ListAPIView):
 class UserDetail(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = serializers.UserSerializer
+
+class RegisterAPI(generics.CreateAPIView):
+    queryset = User.objects.all()
+
+    serializer_class = serializers.RegisterSerializer
+
+class LoginView(views.APIView):
+    # This view should be accessible also for unauthenticated users.
+    permission_classes = (permissions.AllowAny,)
+
+    def post(self, request, format=None):
+        serializer = serializers.LoginSerializer(data=self.request.data,
+            context={ 'request': self.request })
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+        login(request, user)
+        return Response(None, status=status.HTTP_202_ACCEPTED)
 
 
 
@@ -94,3 +115,5 @@ class CategoryDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = serializers.PostSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly,
                           IsOwnerOrReadOnly]
+
+
