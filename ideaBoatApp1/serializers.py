@@ -16,11 +16,11 @@ class PostSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     comments = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     likes = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
-    categories = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+  
 
     class Meta:
         model = Post
-        fields = ['id', 'title', 'body','slug','posted_on','keyword', 'owner', 'comments', 'categories','likes']
+        fields = ['id', 'title', 'body','slug','posted_on', 'owner', 'comments', 'categories','likes']
 
 
 

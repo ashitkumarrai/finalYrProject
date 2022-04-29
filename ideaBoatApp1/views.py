@@ -10,9 +10,6 @@ from .models import Post,Comment,PostLikes,Post_Category
 from rest_framework.permissions import IsAdminUser
 from rest_framework import views
 
-
-
-
 class UserList(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = serializers.UserSerializer
@@ -21,22 +18,12 @@ class UserList(generics.ListAPIView):
 class UserDetail(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = serializers.UserSerializer
+    permission_classes = [IsAdminUser]
 
 class RegisterAPI(generics.CreateAPIView):
     queryset = User.objects.all()
 
     serializer_class = serializers.RegisterSerializer
-
-
-
-
-
-
-
-
-
-
-
 
 
 
