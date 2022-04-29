@@ -33,11 +33,13 @@ urlpatterns = [
 
 
     
-    path('api/', include('djoser.urls.authtoken')),
+    path('auth/', include('djoser.urls.authtoken')),
+    path('auth/', include('djoser.urls.jwt')),
+    path('auth/', include('djoser.urls')),
     
      
-    path('accounts/',include('allauth.urls')),
-    path('api/login/', views.LoginView.as_view()),
+    path('auth2/',include('allauth.urls')),
+
      path('api/register/', views.RegisterAPI.as_view(), name='auth_register'),
 
 
